@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>IRIS - Control DashBoard</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script>
+    
+$(document).ready(function(){
+    //connect to the socket server.
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
+    
+    //receive details from server
+     socket.on('temp', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log').html(msg.number);
+    });
+    
+     socket.on('hum', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log1').html(msg.number);
+    });
+    
+     socket.on('press', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log2').html(msg.number);
+    });
+    
+     socket.on('temperature', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log3').html(msg.number);
+    });
+    
+     socket.on('acc_gyr', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log4').html(msg.number);
+    });
+    
+     socket.on('acc', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log5').html(msg.number);
+    });
+    
+     socket.on('magn', function(msg) {
+        console.log("Received" + msg.number);     
+        $('#log6').html(msg.number);
+    });
+    
+    $('#base_left').click(function(event) {
+      socket.emit('base left');
+    });
+    
+     $('#base_right').click(function(event) {
+      socket.emit('base right');
+    });
+    
+     $('#shoulder_up').click(function(event) {
+      socket.emit('shoulder up');
+    });
+    
+     $('#shoulder_down').click(function(event) {
+      socket.emit('shoulder down');
+    });
+    
+     $('#elbow_up').click(function(event) {
+      socket.emit('elbow up');
+    });
+    
+     $('#elbow_down').click(function(event) {
+      socket.emit('elbow down');
+    });
+    
+     $('#open').click(function(event) {
+      socket.emit('open');
+    });
+    
+     $('#close').click(function(event) {
+      socket.emit('close');
+    });
+    
+     $('#front').click(function(event) {
+      socket.emit('front');
+    });
+    
+     $('#back').click(function(event) {
+      socket.emit('back');
+    });
+    
+     $('#left').click(function(event) {
+      socket.emit('left');
+    });
+    
+     $('#right').click(function(event) {
+      socket.emit('right');
+    });
+    
+     $('#stop').click(function(event) {
+      socket.emit('stop');
+    });
+    
+     $('#stopb').click(function(event) {
+      socket.emit('stop');
+    });
+     
+     $('#stopl').click(function(event) {
+      socket.emit('stop');
+    });
+    
+    $('#stopr').click(function(event) {
+      socket.emit('stop');
+    });
+     
+     $('#on').click(function(event) {
+      socket.emit('on');
+    });
+    
+     $('#off').click(function(event) {
+      socket.emit('off');
+    });
+    
+    $('#on1').click(function(event) {
+      socket.emit('on1');
+    });
+    
+     $('#off1').click(function(event) {
+      socket.emit('off1');
+    });
+     
+     $('#on2').click(function(event) {
+      socket.emit('on2');
+    });
+    
+     $('#off2').click(function(event) {
+      socket.emit('off2');
+    });
+    
+    $('#on3').click(function(event) {
+      socket.emit('on3');
+    });
+    
+     $('#off3').click(function(event) {
+      socket.emit('off3');
+    });
+    
+    $('#on4').click(function(event) {
+      socket.emit('on4');
+    });
+    
+     $('#off4').click(function(event) {
+      socket.emit('off4');
+    });
+});
+
+    </script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Iris Bot DashBoard</h1>
+</div>
+    <h1>Live Video Streaming </h1>
+    <h3><img src="{{ url_for('video_feed') }}" width="90%"></h3>
+    
+
+<div class="container" id="content">
+    <div>
+    <h1>Temperature(*F):  <div id="log" type="text"> 
+         </div>
+    </h1>
+</div>
+<h2> Base </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="base_left" class="btn btn-block btn-lg btn-default">left</button>
+      <button id="base_right" class="btn btn-block btn-lg btn-primary">right</button>
+  </div>
+  
+<h2> Shoulder </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="shoulder_up" class="btn btn-block btn-lg btn-default">up</button>
+      <button id="shoulder_down" class="btn btn-block btn-lg btn-primary">down</button>
+  </div>
+
+<h2> Elbow </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="elbow up" class="btn btn-block btn-lg btn-default">up</button>
+      <button id="elbow down" class="btn btn-block btn-lg btn-primary">down</button>
+  </div>
+
+<h2> Gripper </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="open" class="btn btn-block btn-lg btn-default">open</button>
+      <button id="close" class="btn btn-block btn-lg btn-primary">close</button>
+  </div>
+
+<h2> Front </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="front" class="btn btn-block btn-lg btn-default">front</button>
+      <button id="stop" class="btn btn-block btn-lg btn-primary">stop</button>
+  </div>
+
+<h2> Back </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="back" class="btn btn-block btn-lg btn-default">back</button>
+      <button id="stopb" class="btn btn-block btn-lg btn-primary">stop</button>
+  </div>
+
+<h2> Left </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="left" class="btn btn-block btn-lg btn-default">left</button>
+      <button id="stopl" class="btn btn-block btn-lg btn-primary">stop</button>      
+  </div>
+
+
+<h2> Right </h2>  
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="right" class="btn btn-block btn-lg btn-default">right</button>
+      <button id="stopr" class="btn btn-block btn-lg btn-primary">stop</button>
+  </div>
+
+<h2> Light </h2> 
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="on" class="btn btn-block btn-lg btn-default">on</button>
+      <button id="off" class="btn btn-block btn-lg btn-primary">off</button>
+  </div>
+  
+<h2> Light1 </h2> 
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="on1" class="btn btn-block btn-lg btn-default">on</button>
+      <button id="off1" class="btn btn-block btn-lg btn-primary">off</button>
+  </div>
+  
+<h2> Light2 </h2> 
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="on2" class="btn btn-block btn-lg btn-default">on</button>
+      <button id="off2" class="btn btn-block btn-lg btn-primary">off</button>
+  </div>
+
+<h2> Fan </h2> 
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="on3" class="btn btn-block btn-lg btn-default">on</button>
+      <button id="off3" class="btn btn-block btn-lg btn-primary">off</button>
+  </div>
+  
+<h2> Fan1 </h2> 
+<div class="col-xs-8 col-xs-offset-4">      
+      <button id="on4" class="btn btn-block btn-lg btn-default">on</button>
+      <button id="off4" class="btn btn-block btn-lg btn-primary">off</button>
+  </div>
+   
+<div>
+    <h3>Humidity:  <div id="log1" type="text"> 
+         </div>
+    </h3>
+</div>
+
+ <div>
+    <h3>Pressure:  <div id="log2" type="text"> 
+         </div>
+    </h3>
+</div>
+
+ <div>
+    <h3>Temperature:  <div id="log3" type="text"> 
+         </div>
+    </h3>
+</div>
+  
+ <div>
+    <h3>Acc&Gyro:  <div id="log4" type="text"> 
+         </div>
+    </h3>
+</div>
+  
+ <div>
+    <h3>Acc:  <div id="log5" type="text"> 
+         </div>
+    </h3>
+</div>
+
+ <div>
+    <h3>Magn:  <div id="log6" type="text"> 
+         </div>
+    </h3>
+</div>
+</body>
+</html>
+
+
