@@ -2,12 +2,12 @@
 #include <PubSubClient.h>
 
 // Change the credentials below, so your ESP8266 connects to your router
-const char* ssid = "zeus";
-const char* password = "1234512345";
+const char* ssid = "your ssid";
+const char* password = "your password";
 
 
 // Change the variable to your Raspberry Pi IP address, so it connects to your MQTT broker
-const char* mqtt_server = "192.168.43.56";
+const char* mqtt_server = "pi's ip address";
 
 // Initializes the espClient
 WiFiClient espClient;
